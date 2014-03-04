@@ -105,15 +105,21 @@ unset safe_term match_lhs
 # See also: https://wiki.archlinux.org/index.php/Bash#The_.22command_not_found.22_hook
 [ -r /usr/share/doc/pkgfile/command-not-found.bash ] && . /usr/share/doc/pkgfile/command-not-found.bash
 
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/projects
-if [ -f "$(which virtualenvwrapper_lazy.sh)" ]; then
-  source $(which virtualenvwrapper_lazy.sh)
-elif [ -f "$(which virtualenvwrapper.sh)" ]; then
-  source $(which virtualenvwrapper.sh)
+if [ ! -d /usr/caen ]; then
+  export WORKON_HOME=$HOME/.virtualenvs
+  export PROJECT_HOME=$HOME/projects
+  if [ -f "$(which virtualenvwrapper_lazy.sh)" ]; then
+    source $(which virtualenvwrapper_lazy.sh)
+  elif [ -f "$(which virtualenvwrapper.sh)" ]; then
+    source $(which virtualenvwrapper.sh)
+  fi
 fi
-
 
 
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+
+if [ -d /etc/bash_completion.d ]; then
+  source /etc/bash_completion.d/*
+fi
+
