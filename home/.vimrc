@@ -207,3 +207,8 @@ set expandtab       " Expand TABs to spaces
 call pathogen#infect()
 inoremap {<CR> {<CR>}<C-o>O
 
+if hostname() == 'natearchlap'
+  if has("gui_gtk2")
+    set guifont=Monospace\ 13
+  endif
+endif
